@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kuaidian.weget.mapper.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com.kuaidian.weget.domain.Material" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="materialname" property="materialname" jdbcType="VARCHAR" />
+    <result column="aliyunOssName" property="aliyunossname" jdbcType="VARCHAR" />
+    <result column="videotype" property="videotype" jdbcType="INTEGER" />
+    <result column="isvertical" property="isvertical" jdbcType="INTEGER" />
+    <result column="videourl" property="videourl" jdbcType="VARCHAR" />
+    <result column="viedocatchtime" property="viedocatchtime" jdbcType="TIMESTAMP" />
+    <result column="shareurl" property="shareurl" jdbcType="VARCHAR" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="showindex" property="showindex" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="likenum" property="likenum" jdbcType="INTEGER" />
+    <result column="dislikenum" property="dislikenum" jdbcType="INTEGER" />
+    <result column="commentsnum" property="commentsnum" jdbcType="INTEGER" />
+    <result column="clicknum" property="clicknum" jdbcType="INTEGER" />
+    <result column="updateuserid" property="updateuserid" jdbcType="BIGINT" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="createuserid" property="createuserid" jdbcType="BIGINT" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="isauto" property="isauto" jdbcType="INTEGER" />
+    <result column="usersubjectimg" property="usersubjectimg" jdbcType="INTEGER" />
+    <result column="recommandsttime" property="recommandsttime" jdbcType="TIMESTAMP" />
+    <result column="recommandedtime" property="recommandedtime" jdbcType="TIMESTAMP" />
+    <result column="ordertime" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="isrecommanded" property="isrecommanded" jdbcType="INTEGER" />
+    <result column="needCatch" property="needcatch" jdbcType="INTEGER" />
+    <result column="catchType" property="catchtype" jdbcType="INTEGER" />
+    <result column="catchFailTimes" property="catchfailtimes" jdbcType="INTEGER" />
+    <result column="catchSuccessTime" property="catchsuccesstime" jdbcType="TIMESTAMP" />
+    <result column="catchBeginTime" property="catchbegintime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.kuaidian.weget.domain.MaterialWithBLOBs" extends="BaseResultMap" >
+    <result column="materialdescription" property="materialdescription" jdbcType="LONGVARCHAR" />
+    <result column="materialremark" property="materialremark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, materialname, aliyunOssName, videotype, isvertical, videourl, viedocatchtime, 
+    shareurl, imgurl, showindex, status, likenum, dislikenum, commentsnum, clicknum, 
+    updateuserid, updatetime, createuserid, createtime, isauto, usersubjectimg, recommandsttime, 
+    recommandedtime, ordertime, isrecommanded, needCatch, catchType, catchFailTimes, 
+    catchSuccessTime, catchBeginTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    materialdescription, materialremark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_material
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_material
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.kuaidian.weget.domain.MaterialWithBLOBs" >
+    insert into t_material (id, materialname, aliyunOssName, 
+      videotype, isvertical, videourl, 
+      viedocatchtime, shareurl, imgurl, 
+      showindex, status, likenum, 
+      dislikenum, commentsnum, clicknum, 
+      updateuserid, updatetime, createuserid, 
+      createtime, isauto, usersubjectimg, 
+      recommandsttime, recommandedtime, ordertime, 
+      isrecommanded, needCatch, catchType, 
+      catchFailTimes, catchSuccessTime, catchBeginTime, 
+      materialdescription, materialremark
+      )
+    values (#{id,jdbcType=BIGINT}, #{materialname,jdbcType=VARCHAR}, #{aliyunossname,jdbcType=VARCHAR}, 
+      #{videotype,jdbcType=INTEGER}, #{isvertical,jdbcType=INTEGER}, #{videourl,jdbcType=VARCHAR}, 
+      #{viedocatchtime,jdbcType=TIMESTAMP}, #{shareurl,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, 
+      #{showindex,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{likenum,jdbcType=INTEGER}, 
+      #{dislikenum,jdbcType=INTEGER}, #{commentsnum,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, 
+      #{updateuserid,jdbcType=BIGINT}, #{updatetime,jdbcType=TIMESTAMP}, #{createuserid,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{isauto,jdbcType=INTEGER}, #{usersubjectimg,jdbcType=INTEGER}, 
+      #{recommandsttime,jdbcType=TIMESTAMP}, #{recommandedtime,jdbcType=TIMESTAMP}, #{ordertime,jdbcType=TIMESTAMP}, 
+      #{isrecommanded,jdbcType=INTEGER}, #{needcatch,jdbcType=INTEGER}, #{catchtype,jdbcType=INTEGER}, 
+      #{catchfailtimes,jdbcType=INTEGER}, #{catchsuccesstime,jdbcType=TIMESTAMP}, #{catchbegintime,jdbcType=TIMESTAMP}, 
+      #{materialdescription,jdbcType=LONGVARCHAR}, #{materialremark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kuaidian.weget.domain.MaterialWithBLOBs" >
+    insert into t_material
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="materialname != null" >
+        materialname,
+      </if>
+      <if test="aliyunossname != null" >
+        aliyunOssName,
+      </if>
+      <if test="videotype != null" >
+        videotype,
+      </if>
+      <if test="isvertical != null" >
+        isvertical,
+      </if>
+      <if test="videourl != null" >
+        videourl,
+      </if>
+      <if test="viedocatchtime != null" >
+        viedocatchtime,
+      </if>
+      <if test="shareurl != null" >
+        shareurl,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="showindex != null" >
+        showindex,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="likenum != null" >
+        likenum,
+      </if>
+      <if test="dislikenum != null" >
+        dislikenum,
+      </if>
+      <if test="commentsnum != null" >
+        commentsnum,
+      </if>
+      <if test="clicknum != null" >
+        clicknum,
+      </if>
+      <if test="updateuserid != null" >
+        updateuserid,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="createuserid != null" >
+        createuserid,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="isauto != null" >
+        isauto,
+      </if>
+      <if test="usersubjectimg != null" >
+        usersubjectimg,
+      </if>
+      <if test="recommandsttime != null" >
+        recommandsttime,
+      </if>
+      <if test="recommandedtime != null" >
+        recommandedtime,
+      </if>
+      <if test="ordertime != null" >
+        ordertime,
+      </if>
+      <if test="isrecommanded != null" >
+        isrecommanded,
+      </if>
+      <if test="needcatch != null" >
+        needCatch,
+      </if>
+      <if test="catchtype != null" >
+        catchType,
+      </if>
+      <if test="catchfailtimes != null" >
+        catchFailTimes,
+      </if>
+      <if test="catchsuccesstime != null" >
+        catchSuccessTime,
+      </if>
+      <if test="catchbegintime != null" >
+        catchBeginTime,
+      </if>
+      <if test="materialdescription != null" >
+        materialdescription,
+      </if>
+      <if test="materialremark != null" >
+        materialremark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="materialname != null" >
+        #{materialname,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunossname != null" >
+        #{aliyunossname,jdbcType=VARCHAR},
+      </if>
+      <if test="videotype != null" >
+        #{videotype,jdbcType=INTEGER},
+      </if>
+      <if test="isvertical != null" >
+        #{isvertical,jdbcType=INTEGER},
+      </if>
+      <if test="videourl != null" >
+        #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="viedocatchtime != null" >
+        #{viedocatchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareurl != null" >
+        #{shareurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="showindex != null" >
+        #{showindex,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="dislikenum != null" >
+        #{dislikenum,jdbcType=INTEGER},
+      </if>
+      <if test="commentsnum != null" >
+        #{commentsnum,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="updateuserid != null" >
+        #{updateuserid,jdbcType=BIGINT},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isauto != null" >
+        #{isauto,jdbcType=INTEGER},
+      </if>
+      <if test="usersubjectimg != null" >
+        #{usersubjectimg,jdbcType=INTEGER},
+      </if>
+      <if test="recommandsttime != null" >
+        #{recommandsttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommandedtime != null" >
+        #{recommandedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrecommanded != null" >
+        #{isrecommanded,jdbcType=INTEGER},
+      </if>
+      <if test="needcatch != null" >
+        #{needcatch,jdbcType=INTEGER},
+      </if>
+      <if test="catchtype != null" >
+        #{catchtype,jdbcType=INTEGER},
+      </if>
+      <if test="catchfailtimes != null" >
+        #{catchfailtimes,jdbcType=INTEGER},
+      </if>
+      <if test="catchsuccesstime != null" >
+        #{catchsuccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="catchbegintime != null" >
+        #{catchbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="materialdescription != null" >
+        #{materialdescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="materialremark != null" >
+        #{materialremark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kuaidian.weget.domain.MaterialWithBLOBs" >
+    update t_material
+    <set >
+      <if test="materialname != null" >
+        materialname = #{materialname,jdbcType=VARCHAR},
+      </if>
+      <if test="aliyunossname != null" >
+        aliyunOssName = #{aliyunossname,jdbcType=VARCHAR},
+      </if>
+      <if test="videotype != null" >
+        videotype = #{videotype,jdbcType=INTEGER},
+      </if>
+      <if test="isvertical != null" >
+        isvertical = #{isvertical,jdbcType=INTEGER},
+      </if>
+      <if test="videourl != null" >
+        videourl = #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="viedocatchtime != null" >
+        viedocatchtime = #{viedocatchtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shareurl != null" >
+        shareurl = #{shareurl,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="showindex != null" >
+        showindex = #{showindex,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="likenum != null" >
+        likenum = #{likenum,jdbcType=INTEGER},
+      </if>
+      <if test="dislikenum != null" >
+        dislikenum = #{dislikenum,jdbcType=INTEGER},
+      </if>
+      <if test="commentsnum != null" >
+        commentsnum = #{commentsnum,jdbcType=INTEGER},
+      </if>
+      <if test="clicknum != null" >
+        clicknum = #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="updateuserid != null" >
+        updateuserid = #{updateuserid,jdbcType=BIGINT},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuserid != null" >
+        createuserid = #{createuserid,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isauto != null" >
+        isauto = #{isauto,jdbcType=INTEGER},
+      </if>
+      <if test="usersubjectimg != null" >
+        usersubjectimg = #{usersubjectimg,jdbcType=INTEGER},
+      </if>
+      <if test="recommandsttime != null" >
+        recommandsttime = #{recommandsttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommandedtime != null" >
+        recommandedtime = #{recommandedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ordertime != null" >
+        ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isrecommanded != null" >
+        isrecommanded = #{isrecommanded,jdbcType=INTEGER},
+      </if>
+      <if test="needcatch != null" >
+        needCatch = #{needcatch,jdbcType=INTEGER},
+      </if>
+      <if test="catchtype != null" >
+        catchType = #{catchtype,jdbcType=INTEGER},
+      </if>
+      <if test="catchfailtimes != null" >
+        catchFailTimes = #{catchfailtimes,jdbcType=INTEGER},
+      </if>
+      <if test="catchsuccesstime != null" >
+        catchSuccessTime = #{catchsuccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="catchbegintime != null" >
+        catchBeginTime = #{catchbegintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="materialdescription != null" >
+        materialdescription = #{materialdescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="materialremark != null" >
+        materialremark = #{materialremark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.kuaidian.weget.domain.MaterialWithBLOBs" >
+    update t_material
+    set materialname = #{materialname,jdbcType=VARCHAR},
+      aliyunOssName = #{aliyunossname,jdbcType=VARCHAR},
+      videotype = #{videotype,jdbcType=INTEGER},
+      isvertical = #{isvertical,jdbcType=INTEGER},
+      videourl = #{videourl,jdbcType=VARCHAR},
+      viedocatchtime = #{viedocatchtime,jdbcType=TIMESTAMP},
+      shareurl = #{shareurl,jdbcType=VARCHAR},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      showindex = #{showindex,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      likenum = #{likenum,jdbcType=INTEGER},
+      dislikenum = #{dislikenum,jdbcType=INTEGER},
+      commentsnum = #{commentsnum,jdbcType=INTEGER},
+      clicknum = #{clicknum,jdbcType=INTEGER},
+      updateuserid = #{updateuserid,jdbcType=BIGINT},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      createuserid = #{createuserid,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      isauto = #{isauto,jdbcType=INTEGER},
+      usersubjectimg = #{usersubjectimg,jdbcType=INTEGER},
+      recommandsttime = #{recommandsttime,jdbcType=TIMESTAMP},
+      recommandedtime = #{recommandedtime,jdbcType=TIMESTAMP},
+      ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      isrecommanded = #{isrecommanded,jdbcType=INTEGER},
+      needCatch = #{needcatch,jdbcType=INTEGER},
+      catchType = #{catchtype,jdbcType=INTEGER},
+      catchFailTimes = #{catchfailtimes,jdbcType=INTEGER},
+      catchSuccessTime = #{catchsuccesstime,jdbcType=TIMESTAMP},
+      catchBeginTime = #{catchbegintime,jdbcType=TIMESTAMP},
+      materialdescription = #{materialdescription,jdbcType=LONGVARCHAR},
+      materialremark = #{materialremark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kuaidian.weget.domain.Material" >
+    update t_material
+    set materialname = #{materialname,jdbcType=VARCHAR},
+      aliyunOssName = #{aliyunossname,jdbcType=VARCHAR},
+      videotype = #{videotype,jdbcType=INTEGER},
+      isvertical = #{isvertical,jdbcType=INTEGER},
+      videourl = #{videourl,jdbcType=VARCHAR},
+      viedocatchtime = #{viedocatchtime,jdbcType=TIMESTAMP},
+      shareurl = #{shareurl,jdbcType=VARCHAR},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      showindex = #{showindex,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      likenum = #{likenum,jdbcType=INTEGER},
+      dislikenum = #{dislikenum,jdbcType=INTEGER},
+      commentsnum = #{commentsnum,jdbcType=INTEGER},
+      clicknum = #{clicknum,jdbcType=INTEGER},
+      updateuserid = #{updateuserid,jdbcType=BIGINT},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      createuserid = #{createuserid,jdbcType=BIGINT},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      isauto = #{isauto,jdbcType=INTEGER},
+      usersubjectimg = #{usersubjectimg,jdbcType=INTEGER},
+      recommandsttime = #{recommandsttime,jdbcType=TIMESTAMP},
+      recommandedtime = #{recommandedtime,jdbcType=TIMESTAMP},
+      ordertime = #{ordertime,jdbcType=TIMESTAMP},
+      isrecommanded = #{isrecommanded,jdbcType=INTEGER},
+      needCatch = #{needcatch,jdbcType=INTEGER},
+      catchType = #{catchtype,jdbcType=INTEGER},
+      catchFailTimes = #{catchfailtimes,jdbcType=INTEGER},
+      catchSuccessTime = #{catchsuccesstime,jdbcType=TIMESTAMP},
+      catchBeginTime = #{catchbegintime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

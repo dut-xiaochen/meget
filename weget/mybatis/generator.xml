@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动包位置 -->
+    <!-- <classPathEntry location="D:\software\lib\mysql-connector-java-5.1.21.jar" />
+    <classPathEntry location="C:\oracle\product\10.2.0\db_1\jdbc\lib\ojdbc14.jar" />-->
+
+    <classPathEntry location="./mysql-connector-java-5.1.29.jar"/>
+    <!--<classPathEntry location=".\db2java.jar"/>-->
+    <!--<classPathEntry location=".\db2jcc.jar"/>-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库链接URL、用户名、密码 -->
+       <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                       connectionURL="jdbc:mysql://hxznstest.mysql.rds.aliyuncs.com:3306/zhai-test"
+                       userId="dev" password="dev1234">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.kuaidian.weget.domain"
+                            targetProject="../src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="mapping"
+                         targetProject="../src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kuaidian.weget.mapper"
+                             targetProject="../src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="t_material" domainObjectName="Material"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"  enableSelectByExample="false"
+               selectByExampleQueryId="false" />
+
+</context>
+</generatorConfiguration>
